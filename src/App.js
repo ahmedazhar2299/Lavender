@@ -2,6 +2,7 @@
 import './App.css';
 import Ariival from './components/Arrival/Ariival';
 import Category from './components/Category/Category';
+import Footer from './components/Footer/Footer';
 import Navbar from './components/Nav bar/Navbar';
 import Services from './components/Services/Services';
 import Slideshow from './components/slideShow/Slideshow';
@@ -19,6 +20,7 @@ function App() {
   <Ariival/>
   <Weaklydeal/>
   <Services/>
+  <Footer/>
    </>
   );
 }
