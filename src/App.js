@@ -1,26 +1,25 @@
 
 import './App.css';
-import Ariival from './components/Arrival/Ariival';
-import Category from './components/Category/Category';
-import Footer from './components/Footer/Footer';
-import Navbar from './components/Nav bar/Navbar';
-import Services from './components/Services/Services';
-import Slideshow from './components/slideShow/Slideshow';
-import Topbar from './components/Top-bar/Topbar';
-import Weaklydeal from './components/Weakly Deal/Weaklydeal';
+import Home from './pages/Home/Home';
+import Men from './pages/Men/Men';
+import Women from './pages/Women/Women';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
 
 
 function App() {
   return (
    <>
-  <Topbar/>
-  <Navbar/>
-  <Slideshow/>
-  <Category/>
-  <Ariival/>
-  <Weaklydeal/>
-  <Services/>
-  <Footer/>
+   <BrowserRouter>
+    <Routes>
+      <Route exact path="/" element={<Home />}> </Route>
+      <Route exact path="/category/men" element={<Men />}> </Route>
+      <Route exact path="/category/women" element={<Women />}> </Route>
+    </Routes>
+  </BrowserRouter>,
    </>
   );
 }

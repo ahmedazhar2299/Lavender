@@ -32,12 +32,12 @@ export default function Ariival() {
         </p>
       </div>
       <div className="flex flex-wrap w-full justify-center items-center">
-        <Product/>
-        <Product/>
-        <Product/>
-        <Product/>
-        <Product/>
-        <Product/>
+        <Product src={"https://varkala-react-version-c8q73rcwf-ondrej-svestka.vercel.app/_next/image?url=%2Fimg%2Fproduct%2F0364326148_1_1_1.jpg&w=1920&q=75"}/>
+        <Product src={"https://i0.wp.com/jaxsonmaximus.com/wp-content/uploads/2020/04/34394c211f01e58539f91e79e6ce1420.jpg?fit=564%2C1002&ssl=1"}/>
+        <Product src={"https://ae01.alicdn.com/kf/Hda5634598f06472fa71ad7a07a94fcbbT.jpg"}/>
+        <Product src={"https://i.pinimg.com/originals/2a/fe/e1/2afee127c87029f5440654d4c3652bf4.jpg"}/>
+        <Product src={"https://cdn.cliqueinc.com/posts/83049/casual-style-83049-1584637214442-promo.700x0c.jpg"}/>
+        <Product src={"https://ae01.alicdn.com/kf/H46b0f7e90b0a4937be968e6b6420dd53A.jpg?width=750&height=770&hash=1520"}/>
      </div>
     </div>
   );

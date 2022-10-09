@@ -1,6 +1,7 @@
 import React from 'react'
-
+import { useNavigate } from "react-router-dom";
 export default function Weaklydeal() {
+  let navigate =useNavigate();
   return (
     <div style={{"backgroundColor":"#F0E4E4"}} className=' md:overflow-hidden relative md:h-96 w-full' >
       <img className='vsm:hidden md:inline' src="https://varkala-react-version-c8q73rcwf-ondrej-svestka.vercel.app/_next/image?url=%2Fimg%2Fphoto%2Fdeal-plain.jpg&w=1920&q=75" alt="" />
@@ -31,7 +32,7 @@ export default function Weaklydeal() {
                 <p className='text-slate-400 font-bold'>seconds</p>
             </div>
         </div>
-        <button style={{"border" : "1px solid #212529"}} className='px-5 py-2 font-bold hover:bg-black hover:text-white vsm:w-full md:w-auto'>SHOP NOW</button>
+        <button style={{"border" : "1px solid #212529"}} onClick={()=>navigate('/category/women')} className='px-5 py-2 font-bold hover:bg-black hover:text-white vsm:w-full md:w-auto'>SHOP NOW</button>
 
       </div>
     </div>
