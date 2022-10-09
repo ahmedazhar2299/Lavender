@@ -8,6 +8,8 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import Register from './pages/Register/Register';
+import Cart from './pages/Cart/Cart';
 
 
 function App() {
@@ -18,8 +20,10 @@ function App() {
       <Route exact path="/" element={<Home />}> </Route>
       <Route exact path="/category/men" element={<Men />}> </Route>
       <Route exact path="/category/women" element={<Women />}> </Route>
+      <Route exact path="/register" element={<Register />}> </Route>
+      <Route exact path="/cart" element={<Cart />}> </Route>
     </Routes>
-  </BrowserRouter>,
+  </BrowserRouter>
    </>
   );
 }
