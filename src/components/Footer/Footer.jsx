@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <footer className="pt-10 pb-2 lg:px-40 vsm:px-0">
       <div className="flex flex-wrap w-full justify-center text-center">
-        <div className="md:max-w-xs w-full flex flex-col justify-center items-center">
+        <div className="md:max-w-xs w-full flex flex-col justify-center items-center vsm:mb-10 lg:mb-0">
           <h1 className="font-bold">Be in Touch</h1>
           <p className="text-slate-500">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. At itaque
@@ -15,7 +15,7 @@ export default function Footer() {
             <button><i className="fa-solid fa-paper-plane"></i></button>
           </form>
         </div>
-        <div  className="md:max-w-xs w-full">
+        <div  className="md:max-w-xs w-full vsm:mb-10 lg:mb-0">
             <h1 className="font-bold">Shop</h1>
             <ul>
                 <li className="text-slate-500 hover:underline">For Women</li>
@@ -25,7 +25,7 @@ export default function Footer() {
                 <li className="text-slate-500 hover:underline">Shop</li>
             </ul>
         </div >
-        <div className="md:max-w-xs w-full">
+        <div className="md:max-w-xs w-full vsm:mb-10 lg:mb-0">
             <h1 className="font-bold">Company</h1>
             <ul>
                 <li className="text-slate-500 hover:underline">Login</li>
@@ -35,7 +35,7 @@ export default function Footer() {
                 <li className="text-slate-500 hover:underline">Checkouts</li>
             </ul>
         </div>
-        <div  className="md:max-w-xs w-full">
+        <div  className="md:max-w-xs w-full vsm:mb-10 lg:mb-0">
             <h1 className="font-bold">Your account</h1>
             <ul>
                  <li className="text-slate-500 hover:underline">Login</li>
@@ -49,11 +49,11 @@ export default function Footer() {
 
       </div>
 
-      <div className="flex flex-wrap lg:justify-between text-sm mt-10 vsm:justify-center">
-        <div className="vsm:mb-5 lg:mb-0">
+      <div className="flex flex-wrap md:justify-between text-sm mt-10 vsm:justify-center">
+        <div className="vsm:mb-5 lg:mb-0 text-center">
           <p>© 2022 Your company. All rights reserved.</p>
         </div>
-        <ul className="flex flex-wrap justify-left">
+        <ul className="flex flex-wrap justify-center">
           <li className="text-slate-500 hover:underline sm:mr-5 ">Terms & Conditions</li>
           <li className="text-slate-500 hover:underline  sm:mr-5">Privacy & cookies</li>
           <li className="text-slate-500 hover:underline  sm:mr-5">Accessibility</li>
