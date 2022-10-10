@@ -4,6 +4,8 @@ import Navbar from "../../components/Nav bar/Navbar";
 import Services from "../../components/Services/Services";
 import Topbar from "../../components/Top-bar/Topbar";
 import { useNavigate } from "react-router-dom";
+import Cartitem from "../../components/Cart Item/Cartitem";
+import Summary from "../../components/Order Summary/Summary";
 export default function Cart() {
   let navigate = useNavigate();
   return (
@@ -24,19 +26,32 @@ export default function Cart() {
             SHOPPING CART
           </h1>
         </div>
-        <div className="flex flex-wrap lg:px-20 justify-center">
-          <div className="max-w-2xl mr-10 w-full">
-            <h3
+        <div className="flex flex-wrap lg:px-20 justify-center ">
+          <div className="max-w-2xl lg:mr-2 w-full vsm:overflow-x-scroll lg:overflow-x-hidden  overflow-y-hidden ">
+            <div
               style={{ backgroundColor: "#F8F9FA" }}
-              className="text-sm font-medium p-5"
-            ></h3>
+              className="text-sm font-medium p-5 flex gap-36 w-fit"
+            >
+              <span>ITEM</span>
+              <span>PRICE</span>
+              <span>QUANTITY</span>
+              <span>TOTAL</span>
+            </div>
+            <Cartitem />
+            <Cartitem />
+            <Cartitem />
+            <Cartitem />
+            <Cartitem />
           </div>
-          <div className="max-w-md mr-10 w-full">
-            <h3
-              style={{ backgroundColor: "#F8F9FA" }}
-              className="text-sm font-medium p-5"
-            ></h3>
+
+          <div className="lg:max-w-sm vsm:max-w-2xl vsm:mt-10 lg:mt-0 lg:mr-10 w-full">
+            <Summary />
           </div>
+        </div>
+        <div className="text-center mt-20 ">
+          <button className="focus:outline-none border-2 border-black border-solid w-30 py-2 px-10 text-sm font-semibold hover:text-white hover:bg-black">
+            Proceed to Checkout <i class="fa-solid fa-angle-right"></i>
+          </button>
         </div>
       </div>
       <Services />

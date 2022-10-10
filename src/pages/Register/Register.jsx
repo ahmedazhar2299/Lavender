@@ -20,7 +20,7 @@ export default function Register() {
           <h1 className="my-10 font-medium md:text-6xl vsm:text-2xl sm:text-4xl">CUSTOMER ZONE</h1>
         </div>
         <div className="flex flex-wrap lg:px-20 justify-center">
-          <div className="max-w-lg lg:mr-10 w-full">
+          <div className="max-w-lg vsm:mx-10 lg:ml-0 w-full">
             <h3
               style={{ backgroundColor: "#F8F9FA" }}
               className="text-sm font-medium p-5"
@@ -60,7 +60,7 @@ export default function Register() {
             </form>
           </div>
 
-          <div className="max-w-lg mr-10 w-full">
+          <div className="max-w-lg vsm:mx-10 lg:mx-0 w-full">
             <h3
               style={{ backgroundColor: "#F8F9FA" }}
               className="text-sm font-medium p-5"
