@@ -53,7 +53,7 @@ export default function Productdetail() {
             <form action="#">
               <div className="my-5">
                 <h1 className="font-semibold text-lg mb-2">Size</h1>
-                <label htmlFor="item-small" className="border-2 border-slate-600 cursor-pointer border-solid text-slate-500 px-3 mr-2 hover:text-white hover:bg-slate-600 font-semibold">Small</label>
+                <label htmlFor="item-small" className="border-2  cursor-pointer border-solid py-1 text-slate-500 px-3 mr-2  hover:bg-green-100  hover:border-green-700">Small</label>
                 {/* onClick make it active */}
                 <input
                   id="item-small"
@@ -61,14 +61,14 @@ export default function Productdetail() {
                   name="item-small"
                   className="hidden"
                 />
-                <label className="border-2 border-slate-600 cursor-pointer border-solid text-slate-500 px-3 mr-2 hover:text-white hover:bg-slate-600 font-semibold" htmlFor="item-medium">Medium</label>
+                <label className="border-2  cursor-pointer border-solid text-slate-500 py-1  px-3 mr-2  hover:bg-green-100 hover:border-green-700" htmlFor="item-medium">Medium</label>
                 <input
                   id="item-medium"
                   type="radio"
                   name="item-medium"
                   className="hidden"
                 />
-                <label className="border-2 border-slate-600 cursor-pointer border-solid text-slate-500 px-3 mr-2 hover:text-white hover:bg-slate-600 font-semibold" htmlFor="item-large">Large</label>
+                <label className="border-2 cursor-pointer border-solid text-slate-500  py-1 px-3 mr-2  hover:bg-green-100 hover:border-green-700" htmlFor="item-large">Large</label>
                 <input
                   id="item-large"
                   type="radio"
@@ -78,23 +78,23 @@ export default function Productdetail() {
               </div>
               <div className="my-5">
                 <h1 className="font-semibold text-lg mb-2">Color</h1>
-                <label htmlFor="item-red" className="border-2 border-red-600 cursor-pointer border-solid text-red-500 px-3 mr-2 hover:text-white hover:bg-red-600 font-semibold">Red</label>
+                <label htmlFor="item-red" className="cursor-pointer border-solid border-2 px-3 py-1 mr-2 rounded-md hover:border-green-700 hover:bg-green-100 text-slate-500"> <i class="fa-solid fa-circle text-red-500"></i> Red</label>
                 <input id="red" type="radio" name="red" className="hidden" />
-                <label htmlFor="item-green" className="border-2 border-green-600 cursor-pointer border-solid text-green-500 px-3 mr-2 hover:text-white hover:bg-green-600 font-semibold">Green</label>
+                <label htmlFor="item-green" className="cursor-pointer border-solid border-2 px-3 py-1 mr-2 rounded-md hover:border-green-700 hover:bg-green-100 text-slate-500"><i class="fa-solid fa-circle text-green-500"></i> Green</label>
                 <input
                   id="green"
                   type="radio"
                   name="green"
                   className="hidden"
                 />
-                <label htmlFor="item-yellow" className="border-2 border-yellow-600 cursor-pointer border-solid text-yellow-500 px-3 mr-2 hover:text-white hover:bg-yellow-600 font-semibold">Yellow</label>
+                <label htmlFor="item-yellow" className="cursor-pointer border-solid border-2 px-3 py-1 mr-2 rounded-md hover:border-green-700 hover:bg-green-100 text-slate-500"><i class="fa-solid fa-circle text-yellow-500"></i> Yellow</label>
                 <input
                   id="yellow"
                   type="radio"
                   name="yellow"
                   className="hidden"
                 />
-                <label htmlFor="item-black" className="border-2 border-black cursor-pointer border-solid text-black px-3 mr-2 hover:text-white hover:bg-black font-semibold">Black</label>
+                <label htmlFor="item-black" className="cursor-pointer border-solid border-2 px-3 py-1 mr-2 rounded-md hover:border-green-700 hover:bg-green-100 text-slate-500"><i class="fa-solid fa-circle text-black"></i> Black</label>
                 <input
                   id="black"
                   type="radio"
