@@ -4,28 +4,33 @@ export default function Footer() {
   return (
     <footer className="pt-10 pb-2 lg:px-40 vsm:px-0">
       <div className="flex flex-wrap w-full justify-center text-center">
-        <div className="md:max-w-xs w-full flex flex-col justify-center items-center vsm:mb-10 lg:mb-0">
+        <div className="md:max-w-xs w-full flex flex-col justify-center items-center vsm:mb-10 lg:mb-0 md:mr-10">
           <h1 className="font-bold">Be in Touch</h1>
           <p className="text-slate-500">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. At itaque
             temporibus.
           </p>
-          <form className="border-solid border-b-2 border-black lg:w-full" action="#">
+          <form className="border-solid border-b-2 border-black lg:w-full mt-5" action="#">
             <input placeholder="Your Email Address" type="text" name="" id="" className="text-slate-500 focus:outline-none w-11/12" />
             <button><i className="fa-solid fa-paper-plane"></i></button>
           </form>
         </div>
-        <div  className="md:max-w-xs w-full vsm:mb-10 lg:mb-0">
-            <h1 className="font-bold">Shop</h1>
+        <div className="md:max-w-xs vsm:w-full md:w-6/12 lg:w-40 vsm:mb-10 lg:mb-0 flex justify-center">
+        <div className="text-left w-auto  ">
+            <h1 className="font-bold">Company</h1>
             <ul>
-                <li className="text-slate-500 hover:underline">For Women</li>
+            <li className="text-slate-500 hover:underline">For Women</li>
                 <li className="text-slate-500 hover:underline">For Men</li>
                 <li className="text-slate-500 hover:underline">Stores</li>
                 <li className="text-slate-500 hover:underline">Our Blog</li>
                 <li className="text-slate-500 hover:underline">Shop</li>
             </ul>
-        </div >
-        <div className="md:max-w-xs w-full vsm:mb-10 lg:mb-0">
+        </div>
+        </div>
+
+
+        <div className="md:max-w-xs vsm:w-full md:w-6/12 lg:w-40 vsm:mb-10 lg:mb-0 flex justify-center">
+        <div className="text-left w-auto  ">
             <h1 className="font-bold">Company</h1>
             <ul>
                 <li className="text-slate-500 hover:underline">Login</li>
@@ -35,7 +40,10 @@ export default function Footer() {
                 <li className="text-slate-500 hover:underline">Checkouts</li>
             </ul>
         </div>
-        <div  className="md:max-w-xs w-full vsm:mb-10 lg:mb-0">
+        </div>
+       
+        <div className="md:max-w-xs vsm:w-full md:w-6/12 lg:w-40 vsm:mb-10 lg:mb-0 flex justify-center">
+        <div  className="text-left w-auto  ">
             <h1 className="font-bold">Your account</h1>
             <ul>
                  <li className="text-slate-500 hover:underline">Login</li>
@@ -44,6 +52,7 @@ export default function Footer() {
                 <li className="text-slate-500 hover:underline">Our Products</li>
                 <li className="text-slate-500 hover:underline">Checkouts</li>
             </ul>
+        </div>
         </div>
 
 

@@ -5,7 +5,6 @@ import Product from "../../components/Product/Product";
 import Services from "../../components/Services/Services";
 import Topbar from "../../components/Top-bar/Topbar";
 
-
 let getProducts = () => {
   return (
     <div className="my-10 lg:mx-32 vsm:mx-5 h-full">

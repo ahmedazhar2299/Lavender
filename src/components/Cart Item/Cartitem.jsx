@@ -30,8 +30,9 @@ export default function Cartitem() {
         <div className="mr-28 my-5 whitespace-nowrap">
           <button className="focus:outline-none">-</button>
           <input
-            className="border-2 border-solid focus:outline-none w-20 mx-2"
+            className="border-2 border-solid focus:outline-none w-20 mx-2 text-center placeholder:text-black"
             type="text"
+            placeholder="1"
           />
           <button className="focus:outline-none">+</button>
         </div>

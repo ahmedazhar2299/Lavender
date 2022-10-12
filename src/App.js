@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import Register from './pages/Register/Register';
 import Cart from './pages/Cart/Cart';
+import Itemdetail from './pages/Item Detail/Itemdetail';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
       <Route exact path="/category/women" element={<Women />}> </Route>
       <Route exact path="/register" element={<Register />}> </Route>
       <Route exact path="/cart" element={<Cart />}> </Route>
+      <Route exact path="/item/preview" element={<Itemdetail />}> </Route>
     </Routes>
   </BrowserRouter>
    </>

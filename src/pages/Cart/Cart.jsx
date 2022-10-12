@@ -6,6 +6,7 @@ import Topbar from "../../components/Top-bar/Topbar";
 import { useNavigate } from "react-router-dom";
 import Cartitem from "../../components/Cart Item/Cartitem";
 import Summary from "../../components/Order Summary/Summary";
+import Cartlist from "../../components/Cart List/Cartlist";
 export default function Cart() {
   let navigate = useNavigate();
   return (
@@ -27,22 +28,7 @@ export default function Cart() {
           </h1>
         </div>
         <div className="flex flex-wrap lg:px-20 justify-center ">
-          <div className="max-w-2xl lg:mr-2 w-full vsm:overflow-x-scroll lg:overflow-x-hidden  overflow-y-hidden ">
-            <div
-              style={{ backgroundColor: "#F8F9FA" }}
-              className="text-sm font-medium p-5 flex gap-36 w-fit"
-            >
-              <span>ITEM</span>
-              <span>PRICE</span>
-              <span>QUANTITY</span>
-              <span>TOTAL</span>
-            </div>
-            <Cartitem />
-            <Cartitem />
-            <Cartitem />
-            <Cartitem />
-            <Cartitem />
-          </div>
+          <Cartlist/>
 
           <div className="lg:max-w-sm vsm:max-w-2xl vsm:mt-10 lg:mt-0 lg:mr-10 w-full">
             <Summary />

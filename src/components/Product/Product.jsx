@@ -1,10 +1,11 @@
 import React from "react";
-
+import { useNavigate } from "react-router-dom";
 export default function Product({ src }) {
+  let navigate =useNavigate();
   return (
-    <div className="sm:h-96 vsm:h-full max-w-sm mr-5 cursor-pointer sm:mb-24">
+    <div onClick={()=>navigate('/item/preview')} className="sm:h-96 vsm:h-full max-w-sm mr-5 cursor-pointer sm:mb-24">
       <div className=" h-full overflow-hidden">
-        <img className="hover:scale-105" src={src} alt="" />
+        <img  className="hover:scale-105" src={src} alt="" />
       </div>
       <div className="">
       <p className="font-bold mt-5 mb-2 hover:underline">White Tee</p>
