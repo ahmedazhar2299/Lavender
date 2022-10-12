@@ -104,7 +104,7 @@ export default function Productdetail() {
               </div>
               <div >
                 <h1 className="font-semibold text-lg mb-2">Quantity</h1>
-                <input className="border-2 border-solid focus:outline-none mb-5 px-3 py-2 placeholder:text-black" type="text" name="" id=""  placeholder="1" /> 
+                <input className="border-2 border-solid focus:outline-none mb-5 px-3 py-2 placeholder:text-black" type="number" name="" id=""  placeholder="1" /> 
               </div>
               <button className="focus:outline-none border-solid border-2 hover:text-white hover:bg-black border-black py-3 px-10 w-full"> 
               <i class="fa-solid fa-cart-shopping"></i> Add to Cart</button>

@@ -18,6 +18,7 @@ export default function Cartlist() {
             <Cartitem />
             <Cartitem />
             <Cartitem />
+            
           </div>
   )
 }

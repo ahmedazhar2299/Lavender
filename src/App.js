@@ -11,6 +11,8 @@ import {
 import Register from './pages/Register/Register';
 import Cart from './pages/Cart/Cart';
 import Itemdetail from './pages/Item Detail/Itemdetail';
+import Checkout from './pages/Checkout/Checkout';
+
 
 
 function App() {
@@ -24,6 +26,7 @@ function App() {
       <Route exact path="/register" element={<Register />}> </Route>
       <Route exact path="/cart" element={<Cart />}> </Route>
       <Route exact path="/item/preview" element={<Itemdetail />}> </Route>
+      <Route exact path="/checkout" element={<Checkout />}> </Route>
     </Routes>
   </BrowserRouter>
    </>
