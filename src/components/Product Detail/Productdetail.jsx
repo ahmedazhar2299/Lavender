@@ -76,7 +76,7 @@ export default function Productdetail() {
                   className="hidden"
                 />
               </div>
-              <div className="my-5">
+              <div className="my-5 whitespace-nowrap">
                 <h1 className="font-semibold text-lg mb-2">Color</h1>
                 <label htmlFor="item-red" className="cursor-pointer border-solid border-2 px-3 py-1 mr-2 rounded-md hover:border-green-700 hover:bg-green-100 text-slate-500"> <i class="fa-solid fa-circle text-red-500"></i> Red</label>
                 <input id="red" type="radio" name="red" className="hidden" />
