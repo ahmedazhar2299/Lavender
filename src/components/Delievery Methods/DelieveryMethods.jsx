@@ -4,9 +4,9 @@ export default function DelieveryMethods() {
   return (
     <div className="px-5 py-10">
       <form action="">
-        <div className="flex flex-wrap">
-          <div className="max-w-sm mr-5">
-            <input className="mr-5" type="radio" />
+        <div className="flex flex-wrap vsm:justify-center md:justify-left vsm:text-center md:text-left">
+          <div className="max-w-sm mr-5 my-5">
+            <input className="mr-5" name="delievery-option" type="radio" />
             <div className="max-w-xl w-full">
               <h1 className="font-semibold">UPS NEXT DAY</h1>
               <p className="text-sm text-slaWWte-500">
@@ -14,8 +14,8 @@ export default function DelieveryMethods() {
               </p>
             </div>
           </div>
-          <div className="max-w-sm">
-            <input className="mr-5" type="radio" />
+          <div className="max-w-sm my-5">
+            <input className="mr-5" name="delievery-option" type="radio" />
             <div className="max-w-xl w-full">
               <h1 className="font-semibold">UPS NEXT DAY</h1>
               <p className="text-sm text-slaWWte-500">
@@ -23,8 +23,8 @@ export default function DelieveryMethods() {
               </p>
             </div>
           </div>
-          <div className="max-w-sm mr-5">
-            <input className="mr-5" type="radio" />
+          <div className="max-w-sm mr-5 my-5">
+            <input className="mr-5" name="delievery-option" type="radio" />
             <div className="max-w-xl w-full">
               <h1 className="font-semibold">UPS NEXT DAY</h1>
               <p className="text-sm text-slaWWte-500">
@@ -32,8 +32,8 @@ export default function DelieveryMethods() {
               </p>
             </div>
           </div>
-          <div className="max-w-sm">
-            <input className="mr-5" type="radio" />
+          <div className="max-w-sm my-5">
+            <input className="mr-5" name="delievery-option" type="radio" />
             <div className="max-w-xl w-full">
               <h1 className="font-semibold">UPS NEXT DAY</h1>
               <p className="text-sm text-slaWWte-500">
@@ -42,7 +42,9 @@ export default function DelieveryMethods() {
             </div>
           </div>
         </div>
+        
       </form>
+      
     </div>
   );
 }

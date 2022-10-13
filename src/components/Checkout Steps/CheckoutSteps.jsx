@@ -2,6 +2,8 @@ import React from "react";
 import { useState } from "react";
 import InvoiceAddress from "../Invoice Address/InvoiceAddress";
 import DelieveryMethods from "../Delievery Methods/DelieveryMethods";
+import Payment from "../Payment/Payment";
+import Cartlist from "../Cart List/Cartlist";
 export default function CheckoutSteps({current}) {
     console.log(current)
   return (
@@ -25,7 +27,8 @@ export default function CheckoutSteps({current}) {
       </div>
       {current==="address" ?<InvoiceAddress/>  :""}
       {current==="delievery"?<DelieveryMethods />:""}
-      
+      {current==="payment"?<Payment />:""}
+      {current==="order"?<div className="mt-10"><Cartlist /></div> :""}
     </div>
     
   );
