@@ -6,7 +6,7 @@ export default function InvoiceAddress() {
         
         <h1   style={{ backgroundColor: "#F8F9FA" }} className="text-lg font-medium py-4 px-5 mt-5"> Address</h1>
       <form action="">
-        <div className="flex flex-wrap justify-between">
+        <div className="flex flex-wrap justify-between vsm:px-10 md:px-0">
           <div className="md:max-w-xs w-full">
             <label htmlFor="full-name" className="block text-sm mt-4 mb-2 text-slate-500 font-semibold">Full Name</label>
             <input placeholder="ahmed" className="focus:outline-none border-2 border-solid px-5 py-2 w-full " type="text" name="full-name" id="" />

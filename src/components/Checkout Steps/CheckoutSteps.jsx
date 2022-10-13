@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import InvoiceAddress from "../Invoice Address/InvoiceAddress";
-
+import DelieveryMethods from "../Delievery Methods/DelieveryMethods";
 export default function CheckoutSteps({current}) {
     console.log(current)
   return (
@@ -24,6 +24,7 @@ export default function CheckoutSteps({current}) {
         </div>
       </div>
       {current==="address" ?<InvoiceAddress/>  :""}
+      {current==="delievery"?<DelieveryMethods />:""}
       
     </div>
     
