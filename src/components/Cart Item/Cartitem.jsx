@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Cartitem() {
+export default function Cartitem({purchased}) {
   return (
     <>
       <div className="flex w-full p-5">
@@ -28,19 +28,20 @@ export default function Cartitem() {
           <p className="text-sm">$65.00</p>
         </div>
         <div className="mr-28 my-5 whitespace-nowrap">
-          <button className="focus:outline-none">-</button>
+          <button className={`focus:outline-none ${purchased?"hidden": ""}`}>-</button>
           <input
-            className="border-2 border-solid focus:outline-none w-20 mx-2 text-center placeholder:text-black"
+             disabled={purchased?true: false}
+            className={`border-2 border-solid focus:outline-none w-20 mx-2 text-center placeholder:text-black`}
             type="text"
             placeholder="1"
           />
-          <button className="focus:outline-none">+</button>
+          <button className={`focus:outline-none ${purchased?"hidden": ""}`}>+</button>
         </div>
         <div className="my-5 whitespace-nowrap">
           <p className="text-sm">$260.00</p>
         </div>
 
-          <button className="focus:outline-none hover:text-red-500 relative bottom-12 left-3">
+          <button className={`focus:outline-none hover:text-red-500 relative bottom-12 left-3 ${purchased?"hidden": ""}`}>
           <i className="fa-sharp fa-solid fa-xmark"></i>
           </button>
       </div>

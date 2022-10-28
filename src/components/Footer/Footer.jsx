@@ -60,7 +60,7 @@ export default function Footer() {
 
       <div className="flex flex-wrap md:justify-between text-sm mt-10 vsm:justify-center">
         <div className="vsm:mb-5 lg:mb-0 text-center">
-          <p>© 2022 Your company. All rights reserved.</p>
+          <p>© 2022 Web 7A FAST NU. All rights reserved.</p>
         </div>
         <ul className="flex flex-wrap justify-center">
           <li className="text-slate-500 hover:underline sm:mr-5 ">Terms & Conditions</li>

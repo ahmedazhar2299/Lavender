@@ -59,7 +59,7 @@ let getProducts = () => {
       <div className="flex flex-wrap w-full justify-center items-center">
         <Product src="https://i0.wp.com/jaxsonmaximus.com/wp-content/uploads/2020/04/34394c211f01e58539f91e79e6ce1420.jpg?fit=564%2C1002&ssl=1"/>
         <Product src="https://i0.wp.com/jaxsonmaximus.com/wp-content/uploads/2020/04/34394c211f01e58539f91e79e6ce1420.jpg?fit=564%2C1002&ssl=1" />
-        <Product src="https://i.pinimg.com/originals/2a/fe/e1/2afee127c87029f5440654d4c3652bf4.jpg" />
+        <Product src="https://i.pinimg.com/736x/99/d9/fc/99d9fc1b1831b097d91709b2f6e5dadf.jpg" />
         <Product src="https://i0.wp.com/jaxsonmaximus.com/wp-content/uploads/2020/04/34394c211f01e58539f91e79e6ce1420.jpg?fit=564%2C1002&ssl=1" />
         <Product src="https://ae01.alicdn.com/kf/Hda5634598f06472fa71ad7a07a94fcbbT.jpg" />
         <Product src="https://ae01.alicdn.com/kf/Hda5634598f06472fa71ad7a07a94fcbbT.jpg"/>
