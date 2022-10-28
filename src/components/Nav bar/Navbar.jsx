@@ -5,7 +5,7 @@ export default function Navbar() {
   let navigate =useNavigate();
   return (
     
-    <div style={{"background-color":"#EEECDF"}} className='flex pb-5 lg:px-10 md:px-0 md:justify-between vsm:flex-col md:flex-row vsm:justify-center vsm:items-center'>
+    <div style={{"backgroundColor":"#EEECDF"}} className='flex pb-5 lg:px-10 md:px-0 md:justify-between vsm:flex-col md:flex-row vsm:justify-center vsm:items-center'>
       <ul className='flex vsm:mb-3 md:mb-0'>
         <li className='font-bold text-xl mr-10 cursor-pointer lg:inline vsm:hidden'>Lavender</li>
         <Link className='mr-5  cursor-pointer hover:font-bold vsm:ml-5 md:ml-2' to="/">Home</Link>
