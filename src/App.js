@@ -7,6 +7,7 @@ import {
   BrowserRouter,
   Routes,
   Route,
+  Navigate
 } from "react-router-dom";
 import Register from './pages/Register/Register';
 import Cart from './pages/Cart/Cart';
@@ -14,10 +15,22 @@ import Itemdetail from './pages/Item Detail/Itemdetail';
 import Checkout from './pages/Checkout/Checkout';
 import Order from './pages/Order/Order';
 import ViewOrder from './pages/View Order/ViewOrder';
+import { useSelector } from 'react-redux';
+import checkUserSession from './api/UserSession';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 
+ const checkSession=async(dispatch)=>{
+  await checkUserSession(dispatch)
+ }
 
-
-function App() {
+ function App() {
+  useEffect(()=>{
+    checkSession(dispatch)
+  },[])
+  const dispatch = useDispatch();
+  
+  const user = useSelector(state => state.fetchUser.user)
   return (
    <>
    <BrowserRouter>
@@ -26,11 +39,11 @@ function App() {
       <Route exact path="/category/men" element={<Men />}> </Route>
       <Route exact path="/category/women" element={<Women />}> </Route>
       <Route exact path="/order" element={<Order />}> </Route>
-      <Route exact path="/register" element={<Register />}> </Route>
-      <Route exact path="/cart" element={<Cart />}> </Route>
+      <Route exact path="/register" element={user?<Navigate to="/"/> : <Register />}> </Route>
+      <Route exact path="/cart" element={user?<Cart /> : <Navigate to="/register"/>}> </Route>
       <Route exact path="/item/preview" element={<Itemdetail />}> </Route>
-      <Route exact path="/checkout" element={<Checkout />}> </Route>
-      <Route exact path="/order/:id" element={<ViewOrder />}> </Route>
+      <Route exact path="/checkout" element={user?<Checkout />: <Navigate to="/register"/>}> </Route>
+      <Route exact path="/order/:id" element={user?<ViewOrder />: <Navigate to="/register"/>}> </Route>
     </Routes>
   </BrowserRouter>
    </>

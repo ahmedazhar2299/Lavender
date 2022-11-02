@@ -83,7 +83,7 @@ let getProducts = () => {
           4
         </li>
         <li>
-          <i class="fa-solid fa-angle-right hover:font-bold hover:text-black text-slate-500 text-xl mr-3 mt-1 cursor-pointer"></i>
+          <i className="fa-solid fa-angle-right hover:font-bold hover:text-black text-slate-500 text-xl mr-3 mt-1 cursor-pointer"></i>
         </li>
       </ul>
     </div>

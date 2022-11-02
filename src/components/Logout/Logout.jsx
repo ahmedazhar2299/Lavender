@@ -1,10 +1,14 @@
 import React from 'react'
-import { useEffect } from 'react';
-import { useState } from 'react'
+import { useEffect,useState } from 'react';
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
+import logoutSesion from '../../api/Logout';
 
 export default function Logout({toggler}) {
-   
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [hideModal,setHideModal] = useState(false);
+
     useEffect(()=>{
         if(hideModal===true)
         {
@@ -20,7 +24,11 @@ export default function Logout({toggler}) {
                     <button onClick={() => { setHideModal(true) }} className="absolute top-0 right-2 hover:text-red-700 "><i className="fa-solid fa-xmark"></i></button>
                 </div>
                 <div className="flex">
-                    <button className="focus:outline-none w-full font-semibold rounded-bl-md bg-green-300 py-2 hover:bg-green-500">Yes</button>
+                    <button onClick={async() => {
+                        setHideModal(true)
+                        await logoutSesion(dispatch);   
+                        navigate('/register')
+                    }} className="focus:outline-none w-full font-semibold rounded-bl-md bg-green-300 py-2 hover:bg-green-500">Yes</button>
                     <button onClick={() => {
                         setHideModal(true)
                     }} className="focus:outline-none w-full font-semibold rounded-br-md bg-red-300 py-2 hover:bg-red-500">No</button>

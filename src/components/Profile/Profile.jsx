@@ -1,22 +1,64 @@
 import React from "react";
 import { useRef } from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {useSelector} from 'react-redux'
 import Logout from "../Logout/Logout";
-
+import axios from 'axios'
 var defaultImgPath = "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-portrait-176256935.jpg"
 
+
+
+
+
 export default function Profile() {
+  const [toggleModal, setToggleModal] = useState(false);
+  const fileUpload = useRef();
   const navigate = useNavigate();
+  const user = useSelector(state => state.fetchUser.user)
+  const [isUploaded, setIsUploaded] = useState("");
+  const setImg = async (uploaded_image)=>{
+    if(user){
+      try {
+        const newImg = {
+          "id" : user._id,
+          "profilePicture" : uploaded_image 
+        }
+        await axios.post(`/user/${user._id}/setProfileImg`,newImg)
+        setIsUploaded(uploaded_image)
+       } catch (err) {
+         console.log(err)
+       }
+    }
+    
+    }
+
+ 
+    const getImg = async ()=>{
+      if(user){
+        try {
+          const img = await axios.get(`/user/${user._id}/getProfileImg`)
+          if(img)
+          setIsUploaded(img.data)
+          else{
+            setIsUploaded("")
+          }
+         } catch (err) {
+           console.log("Unable to load image")
+         }
+
+      }
+      }
+      getImg();
+
+  
   const [sectionColor, setSectionColor] = useState({
     "orders": "true",
     "profile": "false",
     "logout": "false"
   });
 
-  const [toggleModal, setToggleModal] = useState(false);
-  const [isUploaded, setIsUploaded] = useState("");
-  const fileUpload = useRef();
   return (
     <div className="pt-5" style={{ backgroundColor: "#F8F9FA" }}>
       <div className="flex flex-col justify-center items-center pt-5 mb-5">
@@ -30,7 +72,7 @@ export default function Profile() {
             const reader = new FileReader();
             reader.addEventListener("load", () => {
               const uploaded_image = reader.result;
-              setIsUploaded(uploaded_image)
+              setImg(uploaded_image);
             });
             reader.readAsDataURL(e.target.files[0])
           }} ref={fileUpload} id="uploadImage" className="hidden" type="file" accept="image/jpeg, image/png, image/jpg" />

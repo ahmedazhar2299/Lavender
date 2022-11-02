@@ -5,7 +5,6 @@ import DelieveryMethods from "../Delievery Methods/DelieveryMethods";
 import Payment from "../Payment/Payment";
 import Cartlist from "../Cart List/Cartlist";
 export default function CheckoutSteps({current}) {
-    console.log(current)
   return (
     <div className="max-w-2xl lg:mr-2 w-full ">
       <div

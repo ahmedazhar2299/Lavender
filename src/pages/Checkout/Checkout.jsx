@@ -56,7 +56,7 @@ export default function Checkout() {
             onClick={() => setcountSteps(countSteps + 1)}
             className="focus:outline-none border-2 border-black border-solid w-30 py-2 px-10 text-sm font-semibold hover:text-white hover:bg-black"
           >
-            {`${buttonText[countSteps]}`} <i class="fa-solid fa-angle-right"></i>
+            {`${buttonText[countSteps]}`} <i className="fa-solid fa-angle-right"></i>
           </button>
         </div>
       </div>

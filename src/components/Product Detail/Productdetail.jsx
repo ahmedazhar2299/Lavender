@@ -78,23 +78,23 @@ export default function Productdetail() {
               </div>
               <div className="my-5 whitespace-nowrap">
                 <h1 className="font-semibold text-lg mb-2">Color</h1>
-                <label htmlFor="item-red" className="cursor-pointer border-solid border-2 px-3 py-1 mr-2 rounded-md hover:border-green-700 hover:bg-green-100 text-slate-500"> <i class="fa-solid fa-circle text-red-500"></i> Red</label>
+                <label htmlFor="item-red" className="cursor-pointer border-solid border-2 px-3 py-1 mr-2 rounded-md hover:border-green-700 hover:bg-green-100 text-slate-500"> <i className="fa-solid fa-circle text-red-500"></i> Red</label>
                 <input id="red" type="radio" name="red" className="hidden" />
-                <label htmlFor="item-green" className="cursor-pointer border-solid border-2 px-3 py-1 mr-2 rounded-md hover:border-green-700 hover:bg-green-100 text-slate-500"><i class="fa-solid fa-circle text-green-500"></i> Green</label>
+                <label htmlFor="item-green" className="cursor-pointer border-solid border-2 px-3 py-1 mr-2 rounded-md hover:border-green-700 hover:bg-green-100 text-slate-500"><i className="fa-solid fa-circle text-green-500"></i> Green</label>
                 <input
                   id="green"
                   type="radio"
                   name="green"
                   className="hidden"
                 />
-                <label htmlFor="item-yellow" className="cursor-pointer border-solid border-2 px-3 py-1 mr-2 rounded-md hover:border-green-700 hover:bg-green-100 text-slate-500"><i class="fa-solid fa-circle text-yellow-500"></i> Yellow</label>
+                <label htmlFor="item-yellow" className="cursor-pointer border-solid border-2 px-3 py-1 mr-2 rounded-md hover:border-green-700 hover:bg-green-100 text-slate-500"><i className="fa-solid fa-circle text-yellow-500"></i> Yellow</label>
                 <input
                   id="yellow"
                   type="radio"
                   name="yellow"
                   className="hidden"
                 />
-                <label htmlFor="item-black" className="cursor-pointer border-solid border-2 px-3 py-1 mr-2 rounded-md hover:border-green-700 hover:bg-green-100 text-slate-500"><i class="fa-solid fa-circle text-black"></i> Black</label>
+                <label htmlFor="item-black" className="cursor-pointer border-solid border-2 px-3 py-1 mr-2 rounded-md hover:border-green-700 hover:bg-green-100 text-slate-500"><i className="fa-solid fa-circle text-black"></i> Black</label>
                 <input
                   id="black"
                   type="radio"
@@ -107,7 +107,7 @@ export default function Productdetail() {
                 <input className="border-2 border-solid focus:outline-none mb-5 px-3 py-2 placeholder:text-black" type="number" name="" id=""  placeholder="1" /> 
               </div>
               <button className="focus:outline-none border-solid border-2 hover:text-white hover:bg-black border-black py-3 px-10 w-full"> 
-              <i class="fa-solid fa-cart-shopping"></i> Add to Cart</button>
+              <i className="fa-solid fa-cart-shopping"></i> Add to Cart</button>
             </form>
           </div>
         </div>
