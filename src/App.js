@@ -24,14 +24,17 @@ import AddItem from './pages/Add Item/AddItem';
  const checkSession=async(dispatch)=>{
   await checkUserSession(dispatch)
  }
+ 
 
  function App() {
+  const dispatch = useDispatch();
   useEffect(()=>{
     checkSession(dispatch)
   },[])
-  const dispatch = useDispatch();
   
   const user = useSelector(state => state.fetchUser.user)
+
+  
   return (
    <>
    <BrowserRouter>
@@ -39,13 +42,13 @@ import AddItem from './pages/Add Item/AddItem';
       <Route exact path="/" element={<Home />}> </Route>
       <Route exact path="/category/men" element={<Men />}> </Route>
       <Route exact path="/category/women" element={<Women />}> </Route>
-      <Route exact path="/order" element={<Order />}> </Route>
       <Route exact path="/register" element={user?<Navigate to="/" /> : <Register />}> </Route>
       <Route exact path="/cart" element={user?<Cart /> : <Navigate to="/register"/>}> </Route>
+      <Route exact path="/order" element={user ? <Order /> : <Navigate to="/register"/> }> </Route>
       <Route exact path="/item/preview" element={<Itemdetail />}> </Route>
       <Route exact path="/checkout" element={user?<Checkout />: <Navigate to="/register"/>}> </Route>
       <Route exact path="/order/:id" element={user?<ViewOrder />: <Navigate to="/register"/>}> </Route>
-      <Route exact path="/additem/" element={user?<AddItem />: <Navigate to="/register"/>}> </Route>
+      <Route exact path="/additem" element={ user ?<AddItem />: <Navigate to="/register"/>}> </Route>
     </Routes>
   </BrowserRouter>
    </>
