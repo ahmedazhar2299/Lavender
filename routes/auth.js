@@ -17,7 +17,7 @@ authRoute.post("/login", async (req, res) => {
       if (!validPassword) res.status(400).json("Invalid Password entered");
       else{ 
          
-        const {profilePicture, ...remaining} = user._doc;
+        const {password,profilePicture, ...remaining} = user._doc;
         res.cookie("user",remaining)
         res.status(200).json(remaining);
       }

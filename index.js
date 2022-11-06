@@ -17,7 +17,7 @@ mongoose
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({extended: false}));
 app.use(cors());
-// app.use(coookieparser());
+ app.use(coookieparser());
 
 //middleware
 app.use("/api/auth", authRoute);

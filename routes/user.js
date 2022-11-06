@@ -4,8 +4,10 @@ const userRoute = Router();
 
 userRoute.get("/", async (req, res) => {
   try {
-
+    if (req.cookies.user)
     res.status(200).json(req.cookies.user);
+    else
+    res.status(404).json(null);
   } catch (err) {
     res.status(500).json(err);
   }
