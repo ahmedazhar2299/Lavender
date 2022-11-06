@@ -1,8 +1,9 @@
 import React from "react";
 import { useRef } from "react";
 import { useEffect } from "react";
-import { useState } from "react";
+
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import {useSelector} from 'react-redux'
 import Logout from "../Logout/Logout";
 import axios from 'axios'
@@ -12,7 +13,7 @@ var defaultImgPath = "https://thumbs.dreamstime.com/b/default-avatar-profile-ico
 
 
 
-export default function Profile() {
+export default function Profile({page}) {
   const [toggleModal, setToggleModal] = useState(false);
   const fileUpload = useRef();
   const navigate = useNavigate();
@@ -54,8 +55,8 @@ export default function Profile() {
 
   
   const [sectionColor, setSectionColor] = useState({
-    "orders": "true",
-    "profile": "false",
+    "orders": page === "orders" ? "true" : "false",
+    "profile": page === "additem" ? "true" : "false",
     "logout": "false"
   });
 
@@ -98,9 +99,10 @@ export default function Profile() {
           "profile": "true",
           "logout": "false"
         })
+        navigate('/additem')
       }} className={` cursor-pointer flex w-full ${sectionColor.profile == "true" ? "bg-slate-200 " : ""} px-5 py-3`}>
-        <i className="fa-solid fa-user text-xl mr-3 text-slate-800"></i>
-        <p>Profile</p>
+        <i className="fa-solid fa-cart-plus text-xl mr-3 text-slate-800"></i>
+        <p>Add Item</p>
       </div>
       <div onClick={() => {
         setSectionColor({
