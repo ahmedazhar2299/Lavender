@@ -6,6 +6,8 @@ import authRoute from "./routes/auth.js";
 import coookieparser from 'cookie-parser'
 import userRoute from "./routes/User.js";
 import bodyParser from "body-parser";
+import productRoute from "./routes/product.js";
+import CartRoute from "./routes/cart.js";
 const app = express();
 
 const URI = `mongodb+srv://${process.env.AUTH_USER}:${process.env.AUTH_PASS}@cluster0.udwaqyp.mongodb.net/${process.env.AUTH_Collection}?retryWrites=true&w=majority`;
@@ -22,7 +24,8 @@ app.use(cors());
 //middleware
 app.use("/api/auth", authRoute);
 app.use('/api/user',userRoute)
-
+app.use('/api/product',productRoute)
+app.use('/api/cart',CartRoute)
 app.listen(process.env.DEFAULT_PORT,()=>{
     console.log(`Server is running at port ${process.env.DEFAULT_PORT}`)
 })
