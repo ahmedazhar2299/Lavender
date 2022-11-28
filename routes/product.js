@@ -13,69 +13,71 @@ productRoute.get("/", async (req, res) => {
 });
 
 productRoute.get("/:id", async (req, res) => {
-    try {
-      if(req.params.id){
-        const product = await Product.findById(req.params.id)
-        res.status(200).json(product)
-      }
-      else{
-        res.status(400).json("No Product Found");
-      }
-    } catch (err) {
-      res.status(500).json(err);
+  try {
+    if (req.params.id) {
+      const product = await Product.findById(req.params.id)
+      res.status(200).json(product)
     }
-  });
-
-productRoute.post("/add/:userID", async (req, res) => {
-  if (
-    req.body.title &&
-    req.body.price &&
-    req.body.category &&
-    req.body.description &&
-    req.body.productPicture
-  ) {
-    try {
-      const user = await User.findById(req.params.userID);
-        if (user && user.isAdmin === "true") {
-        const oldProduct = await Product.find({"title" : req.body.title})
-        if(oldProduct.length == 0){
-            const product = await new Product({
-                title: req.body.title,
-                price: parseFloat(req.body.price),
-                category: req.body.category,
-                description: req.body.description,
-                productPicture : req.body.productPicture
-              });
-            const newProduct = await new Product(product);
-            newProduct.save();
-            res.status(200).json("New product created Successfully");
-        }
-        else{
-            res.status(400).json("Product Already Exist");
-        }
-        }
-        else{
-            res.status(400).json("Unauthorized Access");
-        }
-    } catch (err) {
-      res.status(403).json(err);
+    else {
+      res.status(400).json("No Product Found");
     }
-  } else {
-    res.status(500).json("Failed to create a user");
+  } catch (err) {
+    res.status(500).json(err);
   }
 });
 
- productRoute.post("/:productid/rate", async (req, res) => {
+productRoute.post("/add/:userID", async (req, res) => {
+  try {
+    if (
+      req.body.title &&
+      req.body.price &&
+      req.body.category &&
+      req.body.description &&
+      req.body.productPicture
+    ) {
+
+      const user = await User.findById(req.params.userID);
+      if (user && user.isAdmin === "true") {
+        const oldProduct = await Product.find({ "title": req.body.title })
+        if (oldProduct.length == 0) {
+          const product = await new Product({
+            title: req.body.title,
+            price: parseFloat(req.body.price),
+            category: req.body.category,
+            description: req.body.description,
+            productPicture: req.body.productPicture
+          });
+          const newProduct = await new Product(product);
+          newProduct.save();
+          res.status(200).json("New product created Successfully");
+        }
+        else {
+          res.status(400).json("Product Already Exist");
+        }
+      }
+      else {
+        res.status(400).json("Unauthorized Access");
+      }
+
+    } else {
+      res.status(500).json("Failed to create a user");
+    }
+  } catch (err) {
+    res.status(403).json(err);
+  }
+});
+
+productRoute.post("/:productid/rate", async (req, res) => {
   try {
     if (req.body.name && req.body.description && req.cookies.user._id) {
       const rating = {
-        "userid" : req.cookies.user._id,
-        "name"  : req.body.name,
-        "description" : req.body.description
+        "userid": req.cookies.user._id,
+        "name": req.body.name,
+        "description": req.body.description
       }
       const currentProduct = await Product.findById(req.params.productid);
       await currentProduct.updateOne({
-        $push: { rating: rating  },
+        $push: { rating: rating },
       });
       res.status(200).json("Succesfully added a rating");
     } else {
@@ -84,7 +86,7 @@ productRoute.post("/add/:userID", async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
- })
+})
 
 // productRoute.post("/:id/setProductImg", async (req, res) => {
 //   try {

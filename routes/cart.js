@@ -4,81 +4,171 @@ const CartRoute = Router();
 
 CartRoute.get("/", async (req, res) => {
     try {
-        const Cart = await Cart.find();
-        res.status(200).json(Cart);
+        const cart = await Cart.findOne({ "userId": req.cookies.user._id });
+        res.status(200).json(cart.products);
     } catch (err) {
         res.status(500).json(err);
     }
 });
 
-CartRoute.get("/:id", async (req, res) => {
+let addQuantity = (products, product, addedQuantity, addedPrice) => {
+
+    let filteredCart = products.filter(prod => prod != product);
+    filteredCart === [] ? {
+        ...product,
+        "quantity": product.quantity + addedQuantity,
+        "total": ((product.quantity + addedQuantity) * addedPrice).toFixed(2),
+    } : filteredCart.push({
+        ...product,
+        "quantity": product.quantity + addedQuantity,
+        "total": ((product.quantity + addedQuantity) * addedPrice).toFixed(2),
+    })
+    return filteredCart
+}
+
+
+let removeQuantity = (products, product, removeItemQuantity, removeItemPrice) => {
+
+    let filteredCart = products.filter(prod => prod != product);
+    if (removeItemQuantity >= product.quantity) {
+        return filteredCart
+    }
+    else {
+        filteredCart === [] ? {
+            ...product,
+            "quantity": product.quantity - removeItemQuantity,
+            "total": ((product.quantity - removeItemQuantity) * removeItemPrice).toFixed(2),
+        } : filteredCart.push({
+            ...product,
+            "quantity": product.quantity - removeItemQuantity,
+            "total": ((product.quantity - removeItemQuantity) * removeItemPrice).toFixed(2),
+        })
+    }
+    return filteredCart
+}
+
+CartRoute.delete("/delete/:productId", async (req, res) => {
     try {
-        if (req.params.id) {
-            const Cart = await Cart.findById(req.params.id);
-            res.status(200).json(Cart);
+        if (
+            req.params.productId &&
+            req.cookies.user._id
+        ) {
+
+            const cart = await Cart.findOne({ userId: req.cookies.user._id })
+            if (cart) {
+                let found = false;
+                cart.products.forEach(async (product) => {
+                    if (product.productId == req.params.productId) {
+                        found = true;
+                        await cart.updateOne({
+                            $pull: {
+                                products: product
+                            }
+                        })
+                    }
+                })
+                if (cart.products.length === 0) cart.delete();
+                if (!found) {
+                    res.status(404).json("Item not Found");
+                }
+                else
+                    res.status(200).json("Item removed from cart successfully");
+
+            } else {
+                res.status(402).json("No item added in cart");
+            }
+
         } else {
-            res.status(400).json("No Cart Found");
+            res.status(500).json("Failed to remove item to cart");
+        }
+    } catch (err) {
+        res.status(403).json(err);
+    }
+});
+
+
+
+CartRoute.post("/remove", async (req, res) => {
+    try {
+        if (
+            req.body.productId &&
+            req.cookies.user._id &&
+            req.body.quantity &&
+            req.body.price
+        ) {
+
+            const cart = await Cart.findOne({ userId: req.cookies.user._id })
+            if (cart) {
+                let found = false;
+                cart.products.forEach(async (product) => {
+                    if (product.productId == req.body.productId) {
+                        found = true;
+                        let updatedCart = removeQuantity(cart.products, product, req.body.quantity, req.body.price)
+                        if (updatedCart.length === 0)
+                            cart.delete()
+                        else {
+                            await cart.updateOne({
+                                $set: {
+                                    products: removeQuantity(cart.products, product, req.body.quantity, req.body.price)
+                                },
+                            });
+                        }
+                    }
+                })
+                if (!found) {
+                    res.status(404).json("Item not Found");
+                }
+                else
+                    res.status(200).json("Item removed from cart successfully");
+
+            } else {
+                res.status(402).json("No item added in cart");
+            }
+
+        } else {
+            res.status(500).json("Failed to remove item to cart");
         }
     } catch (err) {
         res.status(500).json(err);
     }
 });
 
+
+
 CartRoute.post("/add", async (req, res) => {
-    if (
-        req.body.productId &&
-        req.cookies.user._id &&
-        req.body.quantity &&
-        req.body.description &&
-        req.body.price
-    ) {
-        const newProduct = {
-            productId: req.body.productId,
-            quantity: req.body.quantity,
-            description: req.body.description,
-            total: req.body.quantity * req.body.price,
-        };
-        try {
+    try {
+        if (
+            req.body.productId &&
+            req.cookies.user._id &&
+            req.body.quantity &&
+            req.body.price
+        ) {
+            const newProduct = {
+                productId: req.body.productId,
+                quantity: req.body.quantity,
+                total: req.body.quantity * req.body.price,
+            };
+
             const cart = await Cart.findOne({ userId: req.cookies.user._id })
             if (cart) {
-                // let found = false;
-                // cart.products.forEach(async (product) => {
-                //     console.log(product.productId == req.body.productId)
-                //     if (product.productId == req.body.productId){
-                //         await cart.updateOne({
-                //             $set: {
-                //                 products: 
-                //                 {
-                //                     ...product,
-                //                     "quantity": product.quantity + req.body.quantity,
-                //                     "total": (product.quantity + req.body.quantity) * req.body.price,
-                //                 },
-                //             },
-                //         });
-                //         found = true;
-                //     } 
-                // })
-                // if(!found){
-                //     await cart.updateOne({
-                //         $push: {
-                //             products: newProduct,
-                //         },
-                //     });
-                // }
-
-                cart.updateOne({
-                    $set: cart.products.map(product => {
-                        return (product.productId == req.body.productId) ?
-                            ({
-                                "productId": product.productId,
-                                "description": product.description,
-                                "quantity": product.quantity + req.body.quantity,
-                                "total": (product.quantity + req.body.quantity) * req.body.price,
-                            })
-                            :
-                            product
-                    })
+                let found = false;
+                cart.products.forEach(async (product) => {
+                    if (product.productId === req.body.productId) {
+                        found = true;
+                        await cart.updateOne({
+                            $set: {
+                                products: addQuantity(cart.products, product, req.body.quantity, req.body.price)
+                            },
+                        });
+                    }
                 })
+                if (!found) {
+                    await cart.updateOne({
+                        $push: {
+                            products: newProduct,
+                        },
+                    });
+                }
                 res.status(200).json("Item added to cart successfully");
             } else {
                 const newCart = await new Cart({
@@ -88,13 +178,17 @@ CartRoute.post("/add", async (req, res) => {
                 newCart.save();
                 res.status(200).json("New product created Successfully");
             }
-        } catch (err) {
-            res.status(403).json(err);
+
+        } else {
+            res.status(500).json("Failed to add item to cart");
         }
-    } else {
-        res.status(500).json("Failed to add item to cart");
+    } catch (err) {
+        res.status(500).json(err);
     }
 });
+
+
+
 
 CartRoute.post("/:Cartid/rate", async (req, res) => {
     try {
