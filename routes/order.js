@@ -5,19 +5,65 @@ const orderRoute = Router();
 
 const generateCurrentDate = () => {
     const Today = new Date();
-    return `${Today.getDay()}/${Today.getMonth() + 1}/${Today.getFullYear()}`;
+    return `${Today.getDay()+1}/${Today.getMonth() + 1}/${Today.getFullYear()}`;
 }
+
+orderRoute.get("/all", async (req, res) => {
+    try {
+        if (req.cookies.user._id && req.cookies.user.isAdmin=="true") {
+            const order = await Order.find()
+            if (order.length>0)
+                res.status(200).json(order)
+            else
+                res.status(404).json("No order found")
+        }
+        else {
+            res.status(404).json("Authentication Error");
+        }
+
+    }
+    catch (err) {
+        res.status(500).json(err)
+    }
+})
+
+
+orderRoute.get("/", async (req, res) => {
+    try {
+        if (req.cookies.user._id) {
+            const order = await Order.findOne({
+                "userId" : req.cookies.user._id
+            })
+            if (order)
+                res.status(200).json(order.orderData)
+            else
+                res.status(404).json("No order found")
+        }
+        else {
+            res.status(404).json("Authentication Error");
+        }
+
+    }
+    catch (err) {
+        res.status(500).json(err)
+    }
+})
+
+
 
 orderRoute.get("/:orderId", async (req, res) => {
     try {
         if (req.cookies.user._id) {
 
-            const order = await Order.findOne({
-                "userId": req.cookies.user._id
-            })
-            const requestedOrder = order.orderData.filter(ord => ord.orderId == req.params.orderId)
-            if (requestedOrder.length > 0)
-                res.status(200).json(requestedOrder[0])
+            const order = await Order.find()
+            let requestedOrder = []
+            order.forEach(orderList=>orderList.orderData.forEach(ord => {
+                
+                if(ord.orderId == req.params.orderId)
+                    requestedOrder=ord
+            }))
+            if (requestedOrder)
+                res.status(200).json(requestedOrder)
             else
                 res.status(404).json(requestedOrder)
 
@@ -34,7 +80,8 @@ orderRoute.get("/:orderId", async (req, res) => {
 
 orderRoute.put("/checkout", async (req, res) => {
     try {
-        if (req.cookies.user._id) {
+        console.log( req.body.address);
+        if (req.cookies.user._id && req.body.address) {
 
             const cart = await Cart.findOne({
                 "userId": req.cookies.user._id
@@ -42,7 +89,8 @@ orderRoute.put("/checkout", async (req, res) => {
             const myOrder = {
                 orderId: Math.floor(Math.random() * 9999) + 1,
                 date: generateCurrentDate(),
-                products: cart.products
+                products: cart.products,
+                address : req.body.address
             }
 
             const order = await Order.findOne({ userId: req.cookies.user._id })
@@ -56,7 +104,7 @@ orderRoute.put("/checkout", async (req, res) => {
             else {
                 const myNewOrder = {
                     userId: req.cookies.user._id,
-                    orderData: [myOrder]
+                    orderData: [myOrder],
                 }
                 const newOrder = await new Order(myNewOrder)
                 newOrder.save();

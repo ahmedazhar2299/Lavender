@@ -9,6 +9,10 @@ const OrderSchema = new mongoose.Schema(
     orderData : {
         type : Array,
         default : []
+    },
+    address  : {
+      type : Object,
+        default : {}
     } 
   }
 );

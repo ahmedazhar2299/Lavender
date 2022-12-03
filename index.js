@@ -11,7 +11,7 @@ import cartRoute from "./routes/cart.js";
 import orderRoute from "./routes/order.js";
 const app = express();
 
-const URI = `mongodb+srv://${process.env.AUTH_USER}:${process.env.AUTH_PASS}@cluster0.udwaqyp.mongodb.net/${process.env.AUTH_Collection}?retryWrites=true&w=majority`;
+const URI = `mongodb://localhost:27017/LavenderStore`;
 mongoose
   .connect(URI)
   .then(console.log("DB connection successful"))
