@@ -12,6 +12,30 @@ productRoute.get("/", async (req, res) => {
   }
 });
 
+
+productRoute.get("/male", async (req, res) => {
+  try {
+    const product = await Product.find({
+      "category" : "Male"
+    })
+    res.status(200).json(product)
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
+productRoute.get("/female", async (req, res) => {
+  try {
+    const product = await Product.find({
+      "category" : "Female"
+    })
+    res.status(200).json(product)
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 productRoute.get("/:id", async (req, res) => {
   try {
     if (req.params.id) {
@@ -45,7 +69,7 @@ productRoute.post("/add/:userID", async (req, res) => {
             price: parseFloat(req.body.price),
             category: req.body.category,
             description: req.body.description,
-            productPicture: req.body.productPicture
+            profilePicture: req.body.productPicture
           });
           const newProduct = await new Product(product);
           newProduct.save();
@@ -69,11 +93,12 @@ productRoute.post("/add/:userID", async (req, res) => {
 
 productRoute.post("/:productid/rate", async (req, res) => {
   try {
-    if (req.body.name && req.body.description && req.cookies.user._id) {
+    if (req.body.name && req.body.description && req.body.rating && req.cookies.user._id) {
       const rating = {
         "userid": req.cookies.user._id,
         "name": req.body.name,
-        "description": req.body.description
+        "description": req.body.description,
+        "rating" : req.body.rating
       }
       const currentProduct = await Product.findById(req.params.productid);
       await currentProduct.updateOne({
@@ -88,20 +113,20 @@ productRoute.post("/:productid/rate", async (req, res) => {
   }
 })
 
-// productRoute.post("/:id/setProductImg", async (req, res) => {
-//   try {
-//     if (req.body.profilePicture && req.cookies.user._id == req.params.id) {
-//       const currentProduct = await Product.findById(req.params.id);
-//       await currentUser.updateOne({
-//         $set: { profilePicture: req.body.profilePicture },
-//       });
-//       res.status(200).json("Succesfully updated profile picture");
-//     } else {
-//       res.status(400).json("Unable to set profile picture");
-//     }
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
+
+productRoute.get("/:productid/reviews", async (req, res) => {
+  try {
+    if (req.params.productid && req.cookies.user._id) {
+      const currentProduct = await Product.findById(req.params.productid);
+      res.status(200).json(currentProduct.rating);
+    } else {
+      res.status(400).json("No Reviews Found");
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+})
+
+
 
 export default productRoute;

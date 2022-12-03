@@ -16,11 +16,11 @@ let addQuantity = (products, product, addedQuantity, addedPrice) => {
     let filteredCart = products.filter(prod => prod != product);
     filteredCart === [] ? {
         ...product,
-        "quantity": product.quantity + addedQuantity,
+        "quantity": parseInt(product.quantity) + parseInt(addedQuantity),
         "total": ((product.quantity + addedQuantity) * addedPrice).toFixed(2),
     } : filteredCart.push({
         ...product,
-        "quantity": product.quantity + addedQuantity,
+        "quantity": parseInt(product.quantity) + parseInt(addedQuantity),
         "total": ((product.quantity + addedQuantity) * addedPrice).toFixed(2),
     })
     return filteredCart
@@ -36,11 +36,11 @@ let removeQuantity = (products, product, removeItemQuantity, removeItemPrice) =>
     else {
         filteredCart === [] ? {
             ...product,
-            "quantity": product.quantity - removeItemQuantity,
+            "quantity": parseInt(product.quantity) - parseInt(removeItemQuantity),
             "total": ((product.quantity - removeItemQuantity) * removeItemPrice).toFixed(2),
         } : filteredCart.push({
             ...product,
-            "quantity": product.quantity - removeItemQuantity,
+            "quantity": parseInt(product.quantity) - parseInt(removeItemQuantity),
             "total": ((product.quantity - removeItemQuantity) * removeItemPrice).toFixed(2),
         })
     }
@@ -94,14 +94,16 @@ CartRoute.post("/remove", async (req, res) => {
             req.body.productId &&
             req.cookies.user._id &&
             req.body.quantity &&
-            req.body.price
+            req.body.price &&
+            req.body.color &&
+            req.body.size
         ) {
 
             const cart = await Cart.findOne({ userId: req.cookies.user._id })
             if (cart) {
                 let found = false;
                 cart.products.forEach(async (product) => {
-                    if (product.productId == req.body.productId) {
+                    if (product.productId == req.body.productId && product.color === req.body.color && product.size === req.body.size) {
                         found = true;
                         let updatedCart = removeQuantity(cart.products, product, req.body.quantity, req.body.price)
                         if (updatedCart.length === 0)
@@ -141,19 +143,23 @@ CartRoute.post("/add", async (req, res) => {
             req.body.productId &&
             req.cookies.user._id &&
             req.body.quantity &&
-            req.body.price
+            req.body.price &&
+            req.body.color &&
+            req.body.size
         ) {
             const newProduct = {
                 productId: req.body.productId,
                 quantity: req.body.quantity,
                 total: req.body.quantity * req.body.price,
+                color : req.body.color,
+                size : req.body.size
             };
 
             const cart = await Cart.findOne({ userId: req.cookies.user._id })
             if (cart) {
                 let found = false;
                 cart.products.forEach(async (product) => {
-                    if (product.productId === req.body.productId) {
+                    if (product.productId === req.body.productId && product.color === req.body.color && product.size === req.body.size) {
                         found = true;
                         await cart.updateOne({
                             $set: {

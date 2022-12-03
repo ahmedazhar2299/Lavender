@@ -16,19 +16,19 @@ mongoose
   .connect(URI)
   .then(console.log("DB connection successful"))
   .catch((err) => console.log(err));
-
-  app.use(bodyParser.json());
-  app.use(bodyParser.urlencoded({extended: false}));
+  
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(cors());
- app.use(coookieparser());
+app.use(coookieparser());
 
 //middleware
 app.use("/api/auth", authRoute);
-app.use('/api/user',userRoute)
-app.use('/api/product',productRoute)
-app.use('/api/cart',cartRoute)
-app.use('/api/order',orderRoute)
-app.listen(process.env.DEFAULT_PORT,()=>{
-    console.log(`Server is running at port ${process.env.DEFAULT_PORT}`)
+app.use('/api/user', userRoute)
+app.use('/api/product', productRoute)
+app.use('/api/cart', cartRoute)
+app.use('/api/order', orderRoute)
+app.listen(process.env.DEFAULT_PORT, () => {
+  console.log(`Server is running at port ${process.env.DEFAULT_PORT}`)
 })
 dotenv;
