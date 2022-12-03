@@ -8,7 +8,7 @@ export default function DelieveryMethods() {
           <div className="max-w-sm mr-5 my-5">
             <input className="mr-5" name="delievery-option" type="radio" />
             <div className="max-w-xl w-full">
-              <h1 className="font-semibold">UPS NEXT DAY</h1>
+              <h1 className="font-semibold">Leopard</h1>
               <p className="text-sm text-slaWWte-500">
                 Get it right on next day - fastest option possible.
               </p>
@@ -17,7 +17,7 @@ export default function DelieveryMethods() {
           <div className="max-w-sm my-5">
             <input className="mr-5" name="delievery-option" type="radio" />
             <div className="max-w-xl w-full">
-              <h1 className="font-semibold">UPS NEXT DAY</h1>
+              <h1 className="font-semibold">TCS</h1>
               <p className="text-sm text-slaWWte-500">
                 Get it right on next day - fastest option possible.
               </p>
@@ -26,7 +26,7 @@ export default function DelieveryMethods() {
           <div className="max-w-sm mr-5 my-5">
             <input className="mr-5" name="delievery-option" type="radio" />
             <div className="max-w-xl w-full">
-              <h1 className="font-semibold">UPS NEXT DAY</h1>
+              <h1 className="font-semibold">DHL</h1>
               <p className="text-sm text-slaWWte-500">
                 Get it right on next day - fastest option possible.
               </p>
@@ -35,7 +35,7 @@ export default function DelieveryMethods() {
           <div className="max-w-sm my-5">
             <input className="mr-5" name="delievery-option" type="radio" />
             <div className="max-w-xl w-full">
-              <h1 className="font-semibold">UPS NEXT DAY</h1>
+              <h1 className="font-semibold">FedEx</h1>
               <p className="text-sm text-slaWWte-500">
                 Get it right on next day - fastest option possible.
               </p>

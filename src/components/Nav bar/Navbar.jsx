@@ -10,8 +10,13 @@ export default function Navbar() {
   let navigate =useNavigate();
   useEffect(()=>{
     const fetchCartItems = async()=>{
-      let items = await axios.get('/cart')
-      setCartItems(items.data ? items.data : [])
+      try {
+          let items = await axios.get('/cart')
+          setCartItems(items.data ? items.data : [])
+      } catch (error) {
+        
+      }
+     
     }
     fetchCartItems()
   },[cartItems])

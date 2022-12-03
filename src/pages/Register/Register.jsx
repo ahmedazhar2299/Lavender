@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Nav bar/Navbar";
 import Services from "../../components/Services/Services";
@@ -13,6 +13,10 @@ export default function Register() {
   const loginEmail = useRef();
   const loginPassword = useRef();
   const registerEmail = useRef();
+  const failure = ` p-3 mb-5 text-red-500 w-full border-2 border-red-500 text-center `
+  const successs = ` p-3 mb-5 text-green-500 w-full border-2 border-green-500 text-center`
+  const [loginFail,setLoginFail] = useState("");
+  const [registerFail,setRegisterFail] = useState("");
   const registerPassword = useRef();
   const dispatch = useDispatch();
 
@@ -23,7 +27,9 @@ export default function Register() {
       "password" : loginPassword.current.value,
       "email" : loginEmail.current.value
       }
-    await loginCall(userCreds,dispatch)
+   const response =  await loginCall(userCreds,dispatch)
+   setLoginFail(response? false: true )
+
   }
 
   const handleRegister = async (event)=>{
@@ -35,10 +41,11 @@ export default function Register() {
       }
       try {
        await axios.post('/auth/register',userCreds)
-      await loginCall(userCreds,dispatch)
-      navigate('/register')
+       const response = await loginCall(userCreds,dispatch)
+       setRegisterFail(response? false: true )
       } catch (err) {
         console.log(err)
+        setRegisterFail(true )
       }
   }
 
@@ -94,6 +101,7 @@ export default function Register() {
                 required
                 name="password"
               />
+               <p className={loginFail === "" ? "" : loginFail === false ? successs : failure}>{loginFail === "" ? "" : loginFail === true ? "Failed to Login" : "Login Successfull"}</p>
               <button type="submit" className="text-center w-full border-2 border-solid border-black focus:outline-none py-2 font-bold hover:bg-black hover hover:text-white">
                 Log In
               </button>
@@ -144,6 +152,7 @@ export default function Register() {
                 required
                 name="password"
               />
+               <p className={registerFail === "" ? "" : registerFail === false ? successs : failure}>{registerFail === "" ? "" : registerFail === true ? "Failed to Register" : "Register Successfull"}</p>
               <button type="Submit" className="text-center w-full border-2 border-solid border-black focus:outline-none py-2 font-bold hover:bg-black hover hover:text-white">
                 Register
               </button>

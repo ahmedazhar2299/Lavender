@@ -9,15 +9,13 @@ import Logout from "../Logout/Logout";
 import axios from 'axios'
 var defaultImgPath = "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-portrait-176256935.jpg"
 
-
-
-
-
 export default function Profile({page}) {
   const [toggleModal, setToggleModal] = useState(false);
   const fileUpload = useRef();
   const navigate = useNavigate();
   const user = useSelector(state => state.fetchUser.user)
+  const isAdmin = user.isAdmin;
+
   const [isUploaded, setIsUploaded] = useState("");
   const setImg = async (uploaded_image)=>{
     if(user){
@@ -79,7 +77,7 @@ export default function Profile({page}) {
           }} ref={fileUpload} id="uploadImage" className="hidden" type="file" accept="image/jpeg, image/png, image/jpg" />
         </div>
 
-        <p className="text-lg font-semibold mt-5 ">Muhammad Ahmed</p>
+        <p className="text-lg font-semibold mt-5 ">{user.username}</p>
         <p className="mb-5 text-sm text-slate-500">Lahore, Pakistan</p>
       </div>
       <div onClick={() => {
@@ -93,7 +91,7 @@ export default function Profile({page}) {
         <i className="fa-solid fa-bag-shopping  text-xl mr-3 text-slate-800 "></i>
         <p >Orders</p>
       </div>
-      <div onClick={() => {
+      {isAdmin=="true" ? <div onClick={() => {
         setSectionColor({
           "orders": "false",
           "profile": "true",
@@ -103,7 +101,7 @@ export default function Profile({page}) {
       }} className={` cursor-pointer flex w-full ${sectionColor.profile == "true" ? "bg-slate-200 " : ""} px-5 py-3`}>
         <i className="fa-solid fa-cart-plus text-xl mr-3 text-slate-800"></i>
         <p>Add Item</p>
-      </div>
+      </div> : ""}
       <div onClick={() => {
         setSectionColor({
           "orders": "false",

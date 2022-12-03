@@ -29,7 +29,7 @@ export default function Ariival() {
       setItems(clothes.data? clothes.data: [])
     }
     getProducts();
-  }, [Items])
+  }, [])
 
   return (
     <div className="py-20 px-10">

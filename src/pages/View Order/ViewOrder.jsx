@@ -3,11 +3,12 @@ import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Nav bar/Navbar";
 import Services from "../../components/Services/Services";
 import Topbar from "../../components/Top-bar/Topbar";
-import { useNavigate } from "react-router-dom";
+import { useParams , useNavigate } from "react-router-dom";
 import Profile from "../../components/Profile/Profile";
 import OrderDetail from "../../components/Order Detail/OrderDetail";
 export default function ViewOrder() {
   let navigate = useNavigate();
+  const { id } = useParams();
   return (
     <div>
       <Topbar />
@@ -27,12 +28,14 @@ export default function ViewOrder() {
           </h1>
         </div>
         <div className="flex flex-wrap lg:px-20 justify-center ">
-          <OrderDetail/>
-
+          <OrderDetail orderId = {id} />
+          
           <div className="lg:max-w-sm vsm:max-w-2xl vsm:mt-10 lg:mt-0 lg:mr-10 w-full">
             <Profile />
           </div>
+          
         </div>
+        
       </div>
       <Services />
       <Footer />

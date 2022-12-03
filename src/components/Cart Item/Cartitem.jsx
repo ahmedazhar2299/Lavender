@@ -1,49 +1,83 @@
+import axios from "axios";
 import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
+import { useRef } from "react";
+import { useDispatch } from "react-redux";
+import fetchTotal from "../../api/fetchTotal";
 
-export default function Cartitem({purchased}) {
-  return (
+export default function Cartitem({purchased,productId,quantity,total,color,size}) {
+  const dispatch = useDispatch()
+  const Quantity = useRef();
+  const [product,setProduct] = useState({})
+  const [productInCart,setproductInCart] = useState("true")
+  useEffect(()=>{
+    const fetchItem = async()=>{
+      let item = await axios.get(`/product/${productId}`)
+      setProduct(item.data? item.data : {})
+    } 
+    fetchItem()
+  },[])
+
+
+  const removeFromCart = (e)=>{
+    e.preventDefault()
+    const removeItem = async()=>{
+    if(product.quantity!=1)
+      await axios.post(`/cart/delete/${product._id}`,{
+        "color" :color ,
+        "size" : size
+      })
+    }
+    removeItem()
+    setproductInCart("false")
+    fetchTotal(dispatch)
+  }
+
+  return productInCart==="false" ? "":(
     <>
       <div className="flex w-full p-5">
         <div className="flex mr-5">
           <div className="w-20 mr-3">
             <img
-              src="https://d19m59y37dris4.cloudfront.net/sell/2-0/img/product/product-square-serrah-galos-494312-unsplash.jpg"
+              src={product.profilePicture}
               alt=""
             />
           </div>
 
-          <div className=" whitespace-nowrap">
-            <h1 className="font-semibold text-sm">SKULL TEE</h1>
+          <div className=" whitespace-nowrap w-24">
+            <h1 className="font-semibold text-sm">{product.title}</h1>
             <div >
               <span className="text-xs text-slate-500">Size : </span>
-              <span className="text-xs text-slate-500 ">Large</span>
+              <span className="text-xs text-slate-500 ">{size}</span>
             </div>
             <div>
               <span className="text-xs text-slate-500 ">Color : </span>
-              <span className="text-xs text-slate-500 ">Green</span>
+              <span className="text-xs text-slate-500 ">{color}</span>
             </div>
           </div>
         </div>
-        <div className="my-5 mr-28 whitespace-nowrap">
-          <p className="text-sm">$65.00</p>
+        <div className="my-5 w-18 mr-28 whitespace-nowrap">
+          <p className="text-sm">${product.price}</p>
         </div>
-        <div className="mr-28 my-5 whitespace-nowrap">
-          <button className={`focus:outline-none ${purchased?"hidden": ""}`}>-</button>
+        <div className="mr-28 my-5 w-28 whitespace-nowrap">
           <input
-             disabled={purchased?true: false}
             className={`border-2 border-solid focus:outline-none w-20 mx-2 text-center placeholder:text-black`}
             type="text"
-            placeholder="1"
+            ref={Quantity}
+            value = {quantity}
+            disabled
           />
-          <button className={`focus:outline-none ${purchased?"hidden": ""}`}>+</button>
         </div>
-        <div className="my-5 whitespace-nowrap">
-          <p className="text-sm">$260.00</p>
+        <div className="my-5 w-18 whitespace-nowrap">
+          <p className="text-sm">${total}</p>
         </div>
-
-          <button className={`focus:outline-none hover:text-red-500 relative bottom-12 left-3 ${purchased?"hidden": ""}`}>
+        <div className="relative h-full w-10">
+        <button onClick={removeFromCart} className={`focus:outline-none absolute top-0 right-0 hover:text-red-500 ${purchased?"hidden": ""}`}>
           <i className="fa-sharp fa-solid fa-xmark"></i>
           </button>
+        </div>
+         
       </div>
       <hr />
     </>

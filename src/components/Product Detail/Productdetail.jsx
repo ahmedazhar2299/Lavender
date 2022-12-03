@@ -1,22 +1,64 @@
 import { CircularProgress } from "@mui/material";
 import axios from "axios";
 import React from "react";
+import { useEffect } from "react";
 import { useRef } from "react";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-export default function Productdetail() {
+import fetchTotal from "../../api/fetchTotal";
 
+
+const generateStars = (rating)=>{
+  let starList = []
+  let i =0;
+  while(i<5){
+    if(i<rating)
+    starList.push(1)
+    else
+    starList.push(0)
+    i++
+  }
+  return starList
+}
+
+export default function Productdetail() {
+  const dispatch = useDispatch();
   const Quantity = useRef()
   const [size,setSize] = useState("")
   const [color,setColor] = useState("")
   const [cartFail,setCartFail] = useState("")
+  const [rating,setRating] = useState([]);
   const failure = `border-2 p-3 mb-5 border-red-500 text-red-500 w-full text-center `
   const successs = `border-2 p-3 mb-5 border-green-500 text-green-500 w-full text-center`
   const selectColor  = (e)=>{
     e.preventDefault();
     setColor(e.target.innerText)
   }
+  
+  useEffect(()=>{
+  const fetchReviews = async()=>{
+    let list = await axios.get(`/product/${product._id}/reviews`)
+    if(list.data){
+      let ratings = list.data
+      let totalRating = 0;
+      let count = 0;
+      ratings.forEach(r=>{
+        totalRating += parseInt(r.rating)
+        count+=1
+      })
+      totalRating/=count
+      setRating(totalRating)
+    }
+    else{
+      setRating([])
+    }
+  }
+  fetchReviews()
+  },[rating])
+
+
+  let stars = generateStars(parseInt(rating))
 
   const selectSize  = (e)=>{
     e.preventDefault();
@@ -30,7 +72,6 @@ export default function Productdetail() {
         const newCartItem = {
           "productId": product._id,
           "quantity": Quantity.current.value,
-          "description": product.description,
           "price": product.price,
           "color" : color,
           "size" : size
@@ -40,6 +81,7 @@ export default function Productdetail() {
         setColor("")
         Quantity.current.value = "0";
         setCartFail(false)
+        fetchTotal(dispatch)
     } catch (err) {
       setCartFail(true)
     }
@@ -86,11 +128,9 @@ export default function Productdetail() {
           <div className="flex justify-between mb-5">
             <p className="text-xl font-bold">${product.price}</p>
             <div className="flex flex-nowrap mt-2">
-              <i className="fa-solid fa-star text-yellow-400"></i>
-              <i className="fa-solid fa-star text-yellow-400"></i>
-              <i className="fa-solid fa-star text-yellow-400"></i>
-              <i className="fa-regular fa-star text-yellow-400"></i>
-              <i className="fa-regular fa-star text-yellow-400"></i>
+              {stars.map(star=>{
+               return star===1?  <i key={Math.floor(Math.random()*99999)} className="fa-solid fa-star text-yellow-400"></i> : <i key={Math.floor(Math.random()*99999)} className="fa-regular fa-star text-yellow-400"></i>
+              })}
             </div>
           </div>
           <p className="text-sm text-slate-500 mb-5">
@@ -153,7 +193,7 @@ export default function Productdetail() {
                 <h1 className="font-semibold text-lg mb-2">Quantity</h1>
                 <input ref={Quantity} onChange={()=>{
                   Quantity.current.value = Quantity.current.value<=0 ? "0" :  Quantity.current.value
-                }} className="border-2 border-solid focus:outline-none mb-5 px-3 py-2 placeholder:text-black" type="number" name="" id=""  placeholder="1" /> 
+                }} className="border-2 border-solid focus:outline-none mb-5 px-3 py-2 placeholder:text-black" type="number" name="" id=""  placeholder="0" /> 
               </div>
               <p className={cartFail === "" ? "" : cartFail === false ? successs : failure}>{cartFail === "" ? "" : cartFail === true ? "Failed to Add item to Cart" : "Succesfully Added a New Item to Cart"}</p>
               <button className="focus:outline-none border-solid border-2 hover:text-white hover:bg-black border-black py-3 px-10 w-full"> 
