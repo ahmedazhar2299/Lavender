@@ -45,7 +45,7 @@ import AddItem from './pages/Add Item/AddItem';
       <Route exact path="/register" element={user?<Navigate to="/" /> : <Register />}> </Route>
       <Route exact path="/cart" element={user?<Cart /> : <Navigate to="/register"/>}> </Route>
       <Route exact path="/order" element={user ? <Order /> : <Navigate to="/register"/> }> </Route>
-      <Route exact path="/item/preview" element={<Itemdetail />}> </Route>
+      <Route exact path="/item/preview/:id" element={<Itemdetail />}> </Route>
       <Route exact path="/checkout" element={user?<Checkout />: <Navigate to="/register"/>}> </Route>
       <Route exact path="/order/:id" element={user?<ViewOrder />: <Navigate to="/register"/>}> </Route>
       <Route exact path="/additem" element={ user ?<AddItem />: <Navigate to="/register"/>}> </Route>

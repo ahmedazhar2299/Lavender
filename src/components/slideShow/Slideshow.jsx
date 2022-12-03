@@ -12,7 +12,7 @@ export default function Slideshow() {
         infiniteLoop
         showStatus={false}
         showThumbs={false}
-         interval={5000}
+         interval={2000}
       >
         <div className=" relative">
           <img loading="lazy" style={{"height":"40vw","width":"auto"}} src="https://s1.1zoom.me/big7/29/Men_White_background_Model_Glance_Hands_561967_2112x1920.jpg" />

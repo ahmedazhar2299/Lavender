@@ -1,11 +1,14 @@
+import axios from "axios";
 import React from "react";
+import { useState,useEffect } from "react";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Nav bar/Navbar";
 import Product from "../../components/Product/Product";
 import Services from "../../components/Services/Services";
 import Topbar from "../../components/Top-bar/Topbar";
+import {CircularProgress } from '@mui/material'
 
-let getProducts = () => {
+let getProducts = (femaleItems) => {
   return (
     <div className="my-10 lg:mx-32 vsm:mx-5 h-full">
       <div className="">
@@ -58,13 +61,12 @@ let getProducts = () => {
       </div>
       <div className="flex flex-wrap w-full justify-center items-center">
 
-        <Product src="https://varkala-react-version-c8q73rcwf-ondrej-svestka.vercel.app/_next/image?url=%2Fimg%2Fproduct%2F0364326148_1_1_1.jpg&w=1920&q=75"/>
-        <Product src="https://ae01.alicdn.com/kf/H46b0f7e90b0a4937be968e6b6420dd53A.jpg?width=750&height=770&hash=1520" />
-        <Product src="https://ae01.alicdn.com/kf/H46b0f7e90b0a4937be968e6b6420dd53A.jpg?width=750&height=770&hash=1520" />
-        <Product src="https://varkala-react-version-c8q73rcwf-ondrej-svestka.vercel.app/_next/image?url=%2Fimg%2Fproduct%2F0364326148_1_1_1.jpg&w=1920&q=75" />
-        <Product src="https://cdn.cliqueinc.com/posts/83049/casual-style-83049-1584637214442-promo.700x0c.jpg" />
-        <Product src="https://cdn.cliqueinc.com/posts/83049/casual-style-83049-1584637214442-promo.700x0c.jpg"/>
-        <Product src="https://varkala-react-version-c8q73rcwf-ondrej-svestka.vercel.app/_next/image?url=%2Fimg%2Fproduct%2F0364326148_1_1_1.jpg&w=1920&q=75"/>
+        {
+          femaleItems.length===0 ? <div className="my-40" ><CircularProgress color="inherit" /></div> :
+          femaleItems.map(item=> {
+           return <Product id={item._id} key={item._id} title={item.title} price={item.price}  image={item.profilePicture}/>
+          })
+        }
       </div>
       <ul className="flex justify-center mt-10">
         <li>
@@ -97,11 +99,21 @@ let DefaultProducts=()=>{
     )
 }
 export default function Women() {
+  const [femaleItems,setFemaleItems] = useState([]);
+  useEffect(()=>{
+    const getFemaleProducts= async ()=>{
+      let clothes = []
+         clothes = await axios.get('/product/female')
+        setFemaleItems(clothes)
+    }
+    getFemaleProducts();
+    },[femaleItems])
+
   return (
     <>
       <Topbar />
       <Navbar />
-      {getProducts()}
+      {getProducts(femaleItems.data?femaleItems.data : [])}
       <div className="bottom-0 relative w-full">
         <Services />
         <Footer />

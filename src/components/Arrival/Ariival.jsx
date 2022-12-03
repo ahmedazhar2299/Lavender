@@ -1,7 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Product from "../Product/Product";
+import axios from "axios";
+import { CircularProgress } from '@mui/material'
+const randomSelector = (arr, num) => {
+  let selected = [];
+  let i = 0;
+  if (arr.length > num) {
+    while (i < num) {
+      let randomIndex = Math.floor(Math.random() * (arr.length - 1))
+      if (selected.indexOf(arr[randomIndex]) === -1)
+        selected.push(arr[randomIndex])
+      else {
+        i--;
+      }
+      i++;
+    }
+    return selected
+  }
+  return arr
+}
 
 export default function Ariival() {
+  const [Items, setItems] = useState([]);
+  useEffect(() => {
+    const getProducts = async () => {
+      let clothes = []
+      clothes = await axios.get('/product')
+      setItems(clothes.data? clothes.data: [])
+    }
+    getProducts();
+  }, [Items])
+
   return (
     <div className="py-20 px-10">
       <div>
@@ -32,13 +61,12 @@ export default function Ariival() {
         </p>
       </div>
       <div className="flex flex-wrap w-full justify-center items-center">
-        <Product src={"https://varkala-react-version-c8q73rcwf-ondrej-svestka.vercel.app/_next/image?url=%2Fimg%2Fproduct%2F0364326148_1_1_1.jpg&w=1920&q=75"}/>
-        <Product src={"https://i0.wp.com/jaxsonmaximus.com/wp-content/uploads/2020/04/34394c211f01e58539f91e79e6ce1420.jpg?fit=564%2C1002&ssl=1"}/>
-        <Product src={"https://ae01.alicdn.com/kf/Hda5634598f06472fa71ad7a07a94fcbbT.jpg"}/>
-        <Product src={"https://i.pinimg.com/originals/2a/fe/e1/2afee127c87029f5440654d4c3652bf4.jpg"}/>
-        <Product src={"https://cdn.cliqueinc.com/posts/83049/casual-style-83049-1584637214442-promo.700x0c.jpg"}/>
-        <Product src={"https://ae01.alicdn.com/kf/H46b0f7e90b0a4937be968e6b6420dd53A.jpg?width=750&height=770&hash=1520"}/>
-     </div>
+
+        {Items.length === 0 ? <div className="my-40" ><CircularProgress color="inherit" /></div>
+          : randomSelector(Items,6).map(item=>{
+            return <Product id={item._id} key={item._id} title={item.title} price={item.price}  image={item.profilePicture}/> 
+          })}
+      </div>
     </div>
   );
 }

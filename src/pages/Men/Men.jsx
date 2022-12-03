@@ -1,11 +1,15 @@
+import axios from "axios";
 import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Nav bar/Navbar";
 import Product from "../../components/Product/Product";
 import Services from "../../components/Services/Services";
 import Topbar from "../../components/Top-bar/Topbar";
+import {CircularProgress } from '@mui/material'
 
-let getProducts = () => {
+const getProducts = (maleItems) => {
   return (
     <div className="my-10 lg:mx-32 vsm:mx-5 h-full">
       <div className="">
@@ -57,13 +61,12 @@ let getProducts = () => {
         </div>
       </div>
       <div className="flex flex-wrap w-full justify-center items-center">
-        <Product src="https://i0.wp.com/jaxsonmaximus.com/wp-content/uploads/2020/04/34394c211f01e58539f91e79e6ce1420.jpg?fit=564%2C1002&ssl=1"/>
-        <Product src="https://i0.wp.com/jaxsonmaximus.com/wp-content/uploads/2020/04/34394c211f01e58539f91e79e6ce1420.jpg?fit=564%2C1002&ssl=1" />
-        <Product src="https://i.pinimg.com/736x/99/d9/fc/99d9fc1b1831b097d91709b2f6e5dadf.jpg" />
-        <Product src="https://i0.wp.com/jaxsonmaximus.com/wp-content/uploads/2020/04/34394c211f01e58539f91e79e6ce1420.jpg?fit=564%2C1002&ssl=1" />
-        <Product src="https://ae01.alicdn.com/kf/Hda5634598f06472fa71ad7a07a94fcbbT.jpg" />
-        <Product src="https://ae01.alicdn.com/kf/Hda5634598f06472fa71ad7a07a94fcbbT.jpg"/>
-        <Product src="https://i0.wp.com/jaxsonmaximus.com/wp-content/uploads/2020/04/34394c211f01e58539f91e79e6ce1420.jpg?fit=564%2C1002&ssl=1"/>
+        {
+          maleItems.length===0 ? <div className="my-40" ><CircularProgress color="inherit" /></div> :
+          maleItems.map(item=> {
+           return <Product id={item._id} key={item._id} title={item.title} price={item.price}  image={item.profilePicture}/>
+          })
+        }
       </div>
       <ul className="flex justify-center mt-10">
         <li>
@@ -86,21 +89,34 @@ let getProducts = () => {
         </li>
       </ul>
     </div>
+
   );
 };
+
 let DefaultProducts=()=>{
-    return (
-        <div>
-            <h1 className="my-60 text-center sm:text-7xl vsm:text-4xl font-bold">No Product Available</h1>
-        </div>
-    )
+  return (
+      <div>
+          <h1 className="my-60 text-center sm:text-7xl vsm:text-4xl font-bold">No Product Available</h1>
+      </div>
+  )
 }
 export default function Men() {
+  const [maleItems,setMaleItems] = useState([]);
+  useEffect(()=>{
+    const getMaleProducts= async ()=>{
+      let clothes = []
+         clothes = await axios.get('/product/male')
+        setMaleItems(clothes)
+    }
+    getMaleProducts();
+    },[maleItems])
+
+
   return (
     <>
       <Topbar />
       <Navbar />
-      {getProducts()}
+      {getProducts(maleItems.data?maleItems.data : [])}
       <div className="bottom-0 relative w-full">
         <Services />
         <Footer />
